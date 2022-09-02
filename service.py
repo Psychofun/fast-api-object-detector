@@ -23,7 +23,8 @@ def init_uploaded_images_dir():
 init_images_dir()
 init_uploaded_images_dir()
 
-#RUN: uvicorn service:app --reload
+#RUN: uvicorn service:app --reload 
+
 #Assign an instance of the FastAPI class to the variable "app".
 # You will interact with your api using this instance.
 app = FastAPI(title='Deploying a ML Model with FastAPI')
@@ -43,7 +44,7 @@ def home():
 # This endpoint handles all the logic necessary for the object detection to work.
 # It requires the desired model and the image in which to perform object detection.
 @app.post("/predict") 
-def prediction(model: Model, file: UploadFile = File(...)):
+def prediction(model: Model,confidence: float = 0.5,file: UploadFile = File(...)):
 
     # 1. VALIDATE INPUT FILE
     filename = file.filename
@@ -69,7 +70,7 @@ def prediction(model: Model, file: UploadFile = File(...)):
     # 3. RUN OBJECT DETECTION MODEL
     
     # Run object detection
-    bbox, label, conf = cv.detect_common_objects(image, model=model)
+    bbox, label, conf = cv.detect_common_objects(image, model=model, confidence=confidence)
     
     # Create image that includes bounding boxes and labels
     output_image = draw_bbox(image, bbox, label, conf)

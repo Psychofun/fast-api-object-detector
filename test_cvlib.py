@@ -19,7 +19,7 @@ def detect_and_draw_box(filename, model="yolov4-tiny", confidence=0.5):
     
     # Read the image into a numpy array
     img = cv2.imread(img_filepath)
-    print("IMG SHAPE:", img.shape)
+    #print("IMG SHAPE:", img.shape)
     
     # Perform the object detection
     bbox, label, conf = cv.detect_common_objects(img, confidence=confidence, model=model)
