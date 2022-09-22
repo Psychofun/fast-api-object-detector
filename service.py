@@ -78,9 +78,7 @@ def prediction(model: Model,confidence: float = 0.5,file: UploadFile = File(...)
     # Save it in a folder within the server
     cv2.imwrite(f'images_with_boxes/{filename}', output_image)
     
-    
     # 4. STREAM THE RESPONSE BACK TO THE CLIENT
-    
     # Open the saved image for reading in binary mode
     file_image = open(f'images_with_boxes/{filename}', mode="rb")
     
